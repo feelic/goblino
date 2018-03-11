@@ -1,0 +1,31 @@
+{
+  "name": "goblino",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server --open"
+  },
+  "author": "feelic",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "file-loader": "^1.1.11",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11",
+    "webpack-dev-server": "^3.1.1"
+  },
+  "dependencies": {
+    "fpsmeter": "^0.3.1"
+  }
+}
