@@ -1,0 +1,52 @@
+<html>
+ <head>
+ </head>
+ <body style="padding: 10px;">
+     <canvas id="game-canvas" width="1200" height="1200" style="border: 1px solid #8b705b;">
+     </canvas>
+   <script type="text/javascript">
+      const canvas = document.getElementById('game-canvas');
+      const ctx = canvas.getContext('2d');
+      const TILE_SIZE = 10;
+      const MARGIN = 3;
+      const BLOCK_SPACING = TILE_SIZE*3 + MARGIN;
+
+      drawTiles();
+
+      function drawTiles () {
+          for (let x = 0; x < 512; x += 1 ) {
+            const matrix = numberToMatrix(x);
+
+            console.log(matrix);
+            drawTileMatrix(
+              x * BLOCK_SPACING % (BLOCK_SPACING * 24),
+              Math.floor(x / 24) * BLOCK_SPACING,
+              matrix
+            );
+          }
+      }
+
+      function numberToMatrix (num) {
+        const blankArray = new Array(9).fill(false);
+        const fullArray = [
+          ...blankArray,
+          ...num.toString(2).split('')
+        ].slice(-9).reverse().map(val => val === '1');
+
+        return [
+          fullArray.slice(0, 3),
+          fullArray.slice(3, 6),
+          fullArray.slice(6, 9)
+        ]
+      }
+      function drawTileMatrix (sx, sy, matrix) {
+        for (let x = 0; x < matrix.length; x += 1) {
+          for (let y = 0; y < matrix[x].length; y += 1) {
+            ctx.fillStyle = matrix[x][y] && '#666' || '#ccc';
+            ctx.fillRect(sx + TILE_SIZE * x, sy + TILE_SIZE * y, TILE_SIZE, TILE_SIZE);
+          }
+        }
+      }
+   </script>
+ </body>
+</html>
