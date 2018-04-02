@@ -12,6 +12,7 @@ export default {
   direction: SOUTH,
   dx: 1 * TILE_SIZE - 1,
   dy: 1 * TILE_SIZE - 1,
+  hitbox: 'circle',
   sprite: {
     asset: playerImage,
     images: {

@@ -26,6 +26,7 @@
     "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {
-    "fpsmeter": "^0.3.1"
+    "fpsmeter": "^0.3.1",
+    "npm": "^5.8.0"
   }
 }

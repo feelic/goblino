@@ -1,4 +1,9 @@
-import { CANVAS_WIDTH, CANVAS_HEIGHT, TILE_SIZE } from '../constants';
+import {
+  CANVAS_WIDTH,
+  CANVAS_HEIGHT,
+  TILE_SIZE,
+  HALF_TILE
+} from '../constants';
 import tileset from './tileset';
 import { getMapData } from './map-loader';
 
@@ -44,4 +49,34 @@ export function detectWallCollision(entity) {
   }
 
   return false;
+}
+
+export function detectEntityCollision(entities, entity) {
+  for (let i = 0; i < entities.length; i += 1) {
+    const e = entities[i];
+
+    if (
+      e.x < entity.x + entity.dx &&
+      e.x + e.dx > entity.x &&
+      e.y < entity.y + entity.dy &&
+      e.dy + e.y > entity.y
+    ) {
+      return e;
+    }
+  }
+}
+
+export function getTileOriginCoordinates(tileCoordinates) {
+  const { x, y } = tileCoordinates;
+  return {
+    x: x * TILE_SIZE,
+    y: y * TILE_SIZE
+  };
+}
+export function getTileCenterCoordinates(tileCoordinates) {
+  const { x, y } = tileCoordinates;
+  return {
+    x: x * TILE_SIZE + HALF_TILE,
+    y: y * TILE_SIZE + HALF_TILE
+  };
 }

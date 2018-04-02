@@ -1,14 +1,17 @@
-import { DIRECTION_VECTORS } from './constants/directions';
+import { DIRECTION_VECTORS, SOUTH } from './constants/directions';
+import { INANIMATE } from './constants/entities';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants';
-import { detectWallCollision } from './map';
+import { detectWallCollision, getTileOriginCoordinates } from './map';
+import entities from './constants/entities';
 
 export function drawEntity(ctx, entity) {
   if (!entity.sprite) {
     ctx.fillStyle = 'rgb(200, 0, 0)';
     return ctx.fillRect(entity.x, entity.y, entity.dx, entity.dy);
   }
-  const { sprite, direction, x, y, dx, dy } = entity;
-  const { x: sx, y: sy } = sprite.images[direction];
+  const { sprite, type, status, direction, x, y, dx, dy } = entity;
+  const variantDeterminer = (type === INANIMATE && status) || direction;
+  const { x: sx, y: sy } = sprite.images[variantDeterminer];
   ctx.drawImage(sprite.asset, sx, sy, dx, dy, x, y, dx, dy);
 }
 
@@ -25,9 +28,19 @@ export function moveEntity(entity, direction, distance) {
     return newEntity;
   }
 
-  return entity;
+  return { ...entity, direction };
 }
 
 function clamp(number, min, max) {
   return Math.min(Math.max(number, min), max);
+}
+
+export function spawnEntity(identifier, tileCoordinates, direction = SOUTH) {
+  const coordinates = getTileOriginCoordinates(tileCoordinates);
+  const entity = entities[identifier]({
+    direction,
+    ...coordinates
+  });
+
+  return entity;
 }
